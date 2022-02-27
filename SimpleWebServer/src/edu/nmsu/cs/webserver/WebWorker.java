@@ -135,16 +135,43 @@ public class WebWorker implements Runnable
 	private void writeContent(OutputStream os, String path) throws Exception
 	{
 		try {
-			Scanner htmlScanner = getLocalHTMLScanner(path);
-			writeHTTPHeader(os, "text/html", "HTTP/1.1 200 OK");
-			while(htmlScanner.hasNext()){
-				String text = htmlScanner.nextLine();
-				if(text.contains("cs371")) {
-					SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
-					text = text.replace("<cs371date>", dateFormatter.format(new Date()));
-					text = text.replace("<cs371server>", "Mohith's server");
+			path = "www/" + path;
+			System.out.println("Path: " + path);
+			File file;
+			if(path.endsWith("favicon.ico")){
+				file = new File("www/res/acc/favicon.ico");
+				if (!file.exists()) throw new Exception("File does not exist! return 404");
+				writeHTTPHeader(os, "image/x-icon", "HTTP/1.1 200 OK");
+				writeToOs(new FileInputStream(file), os);
+			}else {
+				if (path.contains(".png")) {
+					file = new File(path);
+					if (!file.exists()) throw new Exception("File does not exist! return 404");
+					writeHTTPHeader(os, "image/png", "HTTP/1.1 200 OK");
+					writeToOs(new FileInputStream(file), os);
+				} else if (path.contains(".jpeg")) {
+					file = new File(path);
+					if (!file.exists()) throw new Exception("File does not exist! return 404");
+					writeHTTPHeader(os, "image/jpeg", "HTTP/1.1 200 OK");
+					writeToOs(new FileInputStream(file), os);
+				} else if (path.contains(".gif")) {
+					file = new File(path);
+					if (!file.exists()) throw new Exception("File does not exist! return 404");
+					writeHTTPHeader(os, "image/gif", "HTTP/1.1 200 OK");
+					writeToOs(new FileInputStream(file), os);
+				} else {
+					Scanner htmlScanner = getLocalHTMLScanner(path);
+					writeHTTPHeader(os, "text/html", "HTTP/1.1 200 OK");
+					while (htmlScanner.hasNext()) {
+						String text = htmlScanner.nextLine();
+						if (text.contains("cs371")) {
+							SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
+							text = text.replace("<cs371date>", dateFormatter.format(new Date()));
+							text = text.replace("<cs371server>", "Mohith's server");
+						}
+						os.write(text.getBytes());
+					}
 				}
-				os.write(text.getBytes());
 			}
 		}catch(Exception e){
 			writeHTTPHeader(os, "text/html", "HTTP/1.1 404 Not Found");
@@ -156,6 +183,14 @@ public class WebWorker implements Runnable
 		File html = new File(path);
 		System.err.println("Getting file: " + html.getAbsolutePath());
 		return new Scanner(html);
+	}
+
+	private void writeToOs(InputStream fileInputStream, OutputStream os) throws IOException {
+		int byteRead = -1;
+
+		while ((byteRead = fileInputStream.read()) != -1) {
+			os.write(byteRead);
+		}
 	}
 
 } // end class
