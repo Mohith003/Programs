@@ -1,0 +1,59 @@
+Testsuite: edu.nmsu.cs.circles.Circle2Test
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 sec
+------------- Standard Output ---------------
+
+Test starting...
+Running test simpleMove.
+
+Test finished.
+
+Test starting...
+Running test simpleMoveNeg.
+
+Test finished.
+
+Test starting...
+Running test testDecreaseScale.
+
+Test finished.
+
+Test starting...
+Running test testIncreaseScale.
+
+Test finished.
+
+Test starting...
+Running test testIntersectFirstQuad.
+
+Test finished.
+
+Test starting...
+Running test testIntersectSecondQuad.
+
+Test finished.
+
+Test starting...
+Running test testIntersectThirdQuad.
+
+Test finished.
+
+Test starting...
+Running test testIntersectFourthQuad.
+
+Test finished.
+
+Test starting...
+Running test testNonIntersectingCircle.
+
+Test finished.
+------------- ---------------- ---------------
+
+Testcase: simpleMove took 0.008 sec
+Testcase: simpleMoveNeg took 0.004 sec
+Testcase: testDecreaseScale took 0.004 sec
+Testcase: testIncreaseScale took 0.003 sec
+Testcase: testIntersectFirstQuad took 0.005 sec
+Testcase: testIntersectSecondQuad took 0.004 sec
+Testcase: testIntersectThirdQuad took 0.005 sec
+Testcase: testIntersectFourthQuad took 0.003 sec
+Testcase: testNonIntersectingCircle took 0.007 sec
