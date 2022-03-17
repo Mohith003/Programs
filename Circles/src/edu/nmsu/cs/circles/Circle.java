@@ -42,6 +42,32 @@ public abstract class Circle
 	}
 
 	/**
+	 * Change position of circle to origin.
+	 * 
+	 * Added this method as moving the circle's center in different test cases
+	 * is causing a havoc as every test case is trying to move the circle to
+	 * the center by using an offset from the initial values provided with
+	 * the constructor.
+	 * 
+	 * But this offset by each test case is causing the center to keep
+	 * unpredictably moving away as the test cases do not have a certain
+	 * order of execution.
+	 * 
+	 * Instead of using an offset to move the center manually, we are directly
+	 * setting the co ordinates of the center to 0,0 using this method.
+	 * 
+	 * This method is to be called at the beginning of every test case!
+	 * 
+	 * @return the new center coordinate
+	 **/
+	public Point moveToCenter()
+	{
+		center.x = 0;
+		center.y = 0;
+		return center;
+	}
+
+	/**
 	 * Change position of circle relative to current position
 	 * 
 	 * @param xOffset
